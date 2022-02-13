@@ -8,6 +8,7 @@ const {
   MessageSelectMenu,
 } = require("discord.js");
 const { changeTicketNumbers } = require("../utils/changeTicketNumbers");
+const { createTranscript } = require("discord-html-transcripts");
 
 module.exports = {
   name: "interactionCreate",
@@ -18,6 +19,23 @@ module.exports = {
     if (!interaction.isSelectMenu()) return;
     const { guild, member, values } = interaction;
     const value = values[0];
+    if(value == "close"){
+      if(!interaction.member.roles.cache.find((role) => role.id === "940091780869812247")){
+        return interaction.message.channel.send("No tienes los permisos necesarios, solo un staff puede cometer esas acciones ❌.");
+      }
+      changeTicketNumbers('subtract', 1);
+      const attachment = await createTranscript(interaction.channel, {
+        limit: -1,
+        returnBuffer: false,
+        fileName: `${interaction.channel.name}.html`,
+      })
+      interaction.channel.send({files: [attachment]})
+      interaction.channel.send('**Ticket cerrado con éxito**\n\n**El canal sera eliminado en 1 hora.**')
+      setTimeout(() => {
+        interaction.channel.delete();
+      }, 60 * 1000 * 60 * 1);
+      return;
+    }
     if (
       !["duda", "reporte", "apelacion", "donacion", "otro"].includes(value)
     )
@@ -48,7 +66,7 @@ module.exports = {
         const Embed = new Discord.MessageEmbed()
           .setColor("#0099ff")
           .setAuthor({ name: `${guild.name} | ID`, iconURL: guild.iconURL() })
-          .setTitle(`Ticket de ${member.user.username} creado correctamente✅`)
+          .setTitle(`Ticket de ${member.user.username} creado correctamente ✅`)
           .setDescription(
             `Un <@&940091780869812247> revisara tu ticket y te proporcionara ayuda en lo que necesites.`
           )
