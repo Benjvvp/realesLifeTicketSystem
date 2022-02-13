@@ -30,10 +30,10 @@ module.exports = {
         fileName: `${interaction.channel.name}.html`,
       })
       interaction.channel.send({files: [attachment]})
-      interaction.channel.send('**Ticket cerrado con éxito**\n\n**El canal sera eliminado en 1 hora.**')
+      interaction.channel.send('**Ticket cerrado con éxito**\n\n**El canal sera eliminado en 1 minuto.**')
       setTimeout(() => {
         interaction.channel.delete();
-      }, 60 * 1000 * 60 * 1);
+      }, 60 * 1000);
       return;
     }
     if (
@@ -64,7 +64,7 @@ module.exports = {
       })
       .then((channel) => {
         const Embed = new Discord.MessageEmbed()
-          .setColor("#0099ff")
+          .setColor('RED')
           .setAuthor({ name: `${guild.name} | ID`, iconURL: guild.iconURL() })
           .setTitle(`Ticket de ${member.user.username} creado correctamente ✅`)
           .setDescription(

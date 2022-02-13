@@ -32,7 +32,7 @@ module.exports = async (client) => {
   });
 
   client.on("messageCreate", async (message) => {
-      const prefix = process.env.PREFIX;
+      const prefix = process.env['PREFIX'];
       const {author, channel, guild} = message;
 
       if (author.bot || !guild) {

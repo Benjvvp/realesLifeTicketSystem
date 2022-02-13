@@ -17,4 +17,4 @@ for (const file of eventFiles) {
 }
 commandHandler(client);
 
-client.login(process.env.TOKEN);
+client.login(process.env['TOKEN']);

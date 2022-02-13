@@ -42,7 +42,7 @@ module.exports = {
 
     //Embed and Buttons in Channel Ticket
     const embed = new MessageEmbed()
-      .setColor("AQUA")
+      .setColor("RED")
       .setTitle("Abrir ticket Realeslife ✅")
       .setDescription(
         "**Para poder crear un ticket debes seleccionar el apartado que deseas abrir y pulsarlo.**"
