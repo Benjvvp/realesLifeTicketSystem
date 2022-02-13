@@ -57,7 +57,7 @@ module.exports = {
             deny: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
           },
           {
-            id: '940091780869812247',
+            id: value == 'donacion' ? "940325773481480252" : '940091780869812247',
             allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
           }
         ],
@@ -70,8 +70,9 @@ module.exports = {
           .setDescription(
             `Un <@&940091780869812247> revisara tu ticket y te proporcionara ayuda en lo que necesites.`
           )
+          .setTimestamp()
           .setFooter({
-            text: `La lista que se encuentra abajo es valida solamente para el staff.`,
+            text: `Administracion RealesLife.`,
           });
 
         const staffRow = new MessageActionRow().addComponents(
